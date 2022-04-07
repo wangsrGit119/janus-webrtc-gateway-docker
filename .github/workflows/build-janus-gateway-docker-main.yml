@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: ssh deploy
+      - name: ssh download file
         uses: easingthemes/ssh-deploy@v2.2.11
         with:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
@@ -22,13 +22,14 @@ jobs:
           REMOTE_PORT: 22
           SOURCE: ./
           TARGET: /home/temp_janus/
-      - name: executing remote ssh commands using ssh key
+      - name: executing remote ssh commands 
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY }}
           port: 22
+          command_timeout: 60m
           script: |
             docker ps
             cd /home/temp_janus
