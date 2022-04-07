@@ -1,10 +1,9 @@
 name: build docker images - janus-webrtc-docker
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    # 定时任务 每月 1号  九点 10分
+    - cron: '10 21 1 * *'
 
 jobs:
   build:
@@ -22,7 +21,7 @@ jobs:
           REMOTE_PORT: 22
           SOURCE: ./
           TARGET: /home/temp_janus/
-      - name: executing remote ssh commands 
+      - name: executing remote ssh commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -34,3 +33,4 @@ jobs:
             docker ps
             cd /home/temp_janus
             sh build.sh
+            sh push ${{secrets.HUB_USER}} ${{secrets.HUB_PWD}}
