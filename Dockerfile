@@ -132,44 +132,6 @@ RUN FFMPEG_VER="n4.2.1" && cd ~/ffmpeg_sources && \
 
 
 
-# nginx-rtmp with openresty
-RUN ZLIB="zlib-1.2.11" && vNGRTMP="v1.1.11" && PCRE="8.41" && nginx_build=/root/nginx && mkdir $nginx_build && \
-    cd $nginx_build && \
-    wget https://ftp.pcre.org/pub/pcre/pcre-$PCRE.tar.gz && \
-    tar -zxf pcre-$PCRE.tar.gz && \
-    cd pcre-$PCRE && \
-    ./configure && make && make install && \
-    cd $nginx_build && \
-    wget http://zlib.net/$ZLIB.tar.gz && \
-    tar -zxf $ZLIB.tar.gz && \
-    cd $ZLIB && \
-    ./configure && make &&  make install && \
-    cd $nginx_build && \
-    wget https://github.com/arut/nginx-rtmp-module/archive/$vNGRTMP.tar.gz && \
-    tar zxf $vNGRTMP.tar.gz && mv nginx-rtmp-module-* nginx-rtmp-module
-
-
-RUN OPENRESTY="1.13.6.2" && ZLIB="zlib-1.2.11" && PCRE="pcre-8.41" &&  openresty_build=/root/openresty && mkdir $openresty_build && \
-    wget https://openresty.org/download/openresty-$OPENRESTY.tar.gz && \
-    tar zxf openresty-$OPENRESTY.tar.gz && \
-    cd openresty-$OPENRESTY && \
-    nginx_build=/root/nginx && \
-    ./configure --sbin-path=/usr/local/nginx/nginx \
-    --conf-path=/usr/local/nginx/nginx.conf  \
-    --pid-path=/usr/local/nginx/nginx.pid \
-    --with-pcre-jit \
-    --with-ipv6 \
-    --with-pcre=$nginx_build/$PCRE \
-    --with-zlib=$nginx_build/$ZLIB \
-    --with-http_ssl_module \
-    --with-stream \
-    --with-mail=dynamic \
-    --add-module=$nginx_build/nginx-rtmp-module && \
-    make && make install && mv /usr/local/nginx/nginx /usr/local/bin
-
-
-
-
 # Boringssl build section
 # If you want to use the openssl instead of boringssl
 # RUN apt-get update -y && apt-get install -y libssl-dev
@@ -242,22 +204,6 @@ RUN apt-get remove -y libnice-dev libnice10 && \
     make install
 
 
-RUN COTURN="4.5.0.8" && wget https://github.com/coturn/coturn/archive/$COTURN.tar.gz && \
-    tar xzvf $COTURN.tar.gz && \
-    cd coturn-$COTURN && \
-    ./configure && \
-    make && make install
-
-
-# RUN GDB="8.0" && wget ftp://sourceware.org/pub/gdb/releases/gdb-$GDB.tar.gz && \
-#     tar xzvf gdb-$GDB.tar.gz && \
-#     cd gdb-$GDB && \
-#     ./configure && \
-#     make && \
-#     make install
-
-
-# ./configure CFLAGS="-fsanitize=address -fno-omit-frame-pointer" LDFLAGS="-lasan"
 
 
 # datachannel build
@@ -270,7 +216,7 @@ RUN cd / && git clone https://github.com/sctplab/usrsctp.git && cd /usrsctp && \
 WORKDIR /tmp
 RUN git clone https://git.gnunet.org/libmicrohttpd.git
 WORKDIR /tmp/libmicrohttpd
-RUN git checkout v0.9.74
+RUN git checkout v0.9.60
 RUN autoreconf -fi
 RUN ./configure
 RUN make && make install
@@ -326,11 +272,3 @@ RUN npm -v
 
 
 CMD nginx && janus
-
-# RUN apt-get -y install iperf iperf3
-# RUN git clone https://github.com/HewlettPackard/netperf.git && \
-#     cd netperf && \
-#     bash autogen.sh && \
-#     ./configure && \
-#     make && \
-#     make install
