@@ -44,4 +44,4 @@ jobs:
             docker ps
             cd /home/temp_janus
             sh build.sh
-            sh push ${{secrets.HUB_USER}} ${{secrets.HUB_PWD}}
+            sh push.sh ${{secrets.HUB_USER}} ${{secrets.HUB_PWD}}
