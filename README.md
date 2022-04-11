@@ -25,7 +25,7 @@ services:
   # janus-gateway
   #
   janus-gateway:
-    image: 'docker-webrtc-gateway-dev-20220407:latest'
+    image: 'sucwangsr/janus-webrtc-gateway-docker:20220407'
     command: ["/usr/local/bin/janus", "-F", "/usr/local/etc/janus"]
     network_mode: "host"
     
