@@ -3,7 +3,7 @@
 [![build docker images - janus-webrtc-docker](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/build-janus-gateway-docker-main.yml/badge.svg)](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/build-janus-gateway-docker-main.yml)
 ## janus 1.x
 
-[janus:1.0](https://github.com/meetecho/janus-gateway.git "janus:1.0")
+[janus](https://github.com/meetecho/janus-gateway.git "janus:1.0")
 
 > release repo  to docker hub by github action
 
