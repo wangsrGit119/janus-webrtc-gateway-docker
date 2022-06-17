@@ -11,6 +11,15 @@
 
 modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 > https://github.com/atyenoria/janus-webrtc-gateway-docker
+> 
+
+## image version
+
+|  janus-webrtc-docker:version |  janus:version |
+| ------------ | ------------ |
+|  20220407 |  1.0.0 |
+|  20220617 | 1.0.1   |
+
 
 ## how to use
 
