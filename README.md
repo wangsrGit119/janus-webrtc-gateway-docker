@@ -27,19 +27,19 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
  - touch docker-compose.yml --- content eg::point_down: 
 
 ```yaml
-version: '2.1'
+version: '1.0.1'
 services:
 
   #
   # janus-gateway
   #
   janus-gateway:
-    image: 'sucwangsr/janus-webrtc-gateway-docker:20220407'
+    image: 'sucwangsr/janus-webrtc-gateway-docker:20220617'
     command: ["/usr/local/bin/janus", "-F", "/usr/local/etc/janus"]
     network_mode: "host"
     
     volumes:
-      - "./conf/janus.transport.http.jcfg:/usr/local/etc/janus/janus.transport.http.jcfg"  # 打开adminapi的时候设
+      - "./conf/janus.transport.http.jcfg:/usr/local/etc/janus/janus.transport.http.jcfg"  # open adminapi config
       - "./conf/janus.jcfg:/usr/local/etc/janus/janus.jcfg"
       - "./conf/janus.eventhandler.sampleevh.jcfg:/usr/local/etc/janus/janus.eventhandler.sampleevh.jcfg"
     restart: always
