@@ -28,7 +28,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
  - touch docker-compose.yml --- content eg::point_down: 
 
 ```yaml
-version: '1.0.1'
+version: '1.0.2'
 services:
 
   #
