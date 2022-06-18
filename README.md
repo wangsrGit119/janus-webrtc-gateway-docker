@@ -19,6 +19,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 | ------------ | ------------ |
 |  20220407 |  1.0.0 |
 |  20220617 | 1.0.1   |
+|  20220618 | 1.0.2   |
 
 
 ## how to use
