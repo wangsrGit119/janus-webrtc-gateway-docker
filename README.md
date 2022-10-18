@@ -22,6 +22,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 |  20220618 | 1.0.2   |
 |  20220627 | 1.0.3   |
 |  20220813 | 1.0.4   |
+|  20221018 | 1.1.0   |
 
 ## how to use
 
@@ -29,14 +30,14 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
  - touch docker-compose.yml --- content eg::point_down: 
 
 ```yaml
-version: '1.0.4'
+version: '1.1.0'
 services:
 
   #
   # janus-gateway
   #
   janus-gateway:
-    image: 'sucwangsr/janus-webrtc-gateway-docker:20220813'
+    image: 'sucwangsr/janus-webrtc-gateway-docker:20221018'
     command: ["/usr/local/bin/janus", "-F", "/usr/local/etc/janus"]
     network_mode: "host"
     
