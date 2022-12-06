@@ -1,6 +1,6 @@
-
 # janus-webrtc-gateway-docker
 [![build docker images - janus-webrtc-docker](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/build-janus-gateway-docker-main.yml/badge.svg)](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/build-janus-gateway-docker-main.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FwangsrGit119%2Fjanus-webrtc-gateway-docker.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FwangsrGit119%2Fjanus-webrtc-gateway-docker?ref=badge_shield)
 ## janus 1.x
 
 [janus address](https://github.com/meetecho/janus-gateway.git "janus:1.0")
@@ -49,3 +49,7 @@ services:
 
 
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FwangsrGit119%2Fjanus-webrtc-gateway-docker.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FwangsrGit119%2Fjanus-webrtc-gateway-docker?ref=badge_large)
