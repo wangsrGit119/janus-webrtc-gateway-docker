@@ -3,10 +3,7 @@
 [![build docker images - janus-webrtc-docker](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/build-janus-gateway-docker-main.yml/badge.svg)](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/build-janus-gateway-docker-main.yml)
 
 > **Warning**
-
 >- if you want to use Janus 0.x please visit this repo [janus-webrtc-gateway-docker-0.x](https://github.com/atyenoria/janus-webrtc-gateway-docker)
->- 如果你想使用 Janus 0.x版本的话请访问 [janus-webrtc-gateway-docker-0.x](https://github.com/atyenoria/janus-webrtc-gateway-docker) 这个仓库
->- 当前仓库的版本都是 Janus 1.0 版本之后的 。
 ## janus 1.x
 
 [janus address](https://github.com/meetecho/janus-gateway.git "janus:1.0")
