@@ -27,6 +27,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 |  20220813 | 1.0.4   |
 |  20221018 | 1.1.0   |
 |  20230108 | 1.1.1   |
+|  20230127 | 1.1.2   |
 ## how to use
 
  - mkdir conf ---- configs from [https://github.com/meetecho/janus-gateway/tree/master/conf](https://github.com/meetecho/janus-gateway/tree/master/conf)
