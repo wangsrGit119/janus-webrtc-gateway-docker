@@ -198,31 +198,14 @@ RUN make && make install
 RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
     git checkout refs/tags/v1.1.4 && \
     sh autogen.sh &&  \
-    PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
-    --enable-post-processing \
-    --enable-data-channels \
-    --disable-rabbitmq \
-    --disable-mqtt \
-    --disable-unix-sockets \
-    --enable-dtls-settimeout \
-    --enable-plugin-echotest \
-    --enable-plugin-recordplay \
-    --enable-plugin-sip \
-    --enable-plugin-videocall \
-    --enable-plugin-voicemail \
-    --enable-plugin-textroom \
-    --enable-rest \
-    --enable-turn-rest-api \
-    --enable-plugin-audiobridge \
-    --enable-plugin-nosip \
-    --enable-all-handlers && \
-    make && make install && make configs && ldconfig
+    ./configure --prefix=/opt/janus && \
+    make && make install && make configs
 
 COPY nginx.conf /usr/local/nginx/nginx.conf
 
 
 ENV NVM_VERSION v0.35.3
-ENV NODE_VERSION v12.18.3
+ENV NODE_VERSION v16.20.1
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir $NVM_DIR
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash
