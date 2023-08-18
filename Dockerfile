@@ -25,7 +25,7 @@ RUN apt-get -y update && apt-get install -y \
     cmake \
     unzip \
     zip \
-    lsof wget vim git sudo rsync cron mysql-client openssh-server supervisor locate mplayer valgrind certbot curl dnsutils tcpdump gstreamer1.0-tools
+    lsof wget vim sudo rsync cron mysql-client openssh-server supervisor locate mplayer valgrind certbot curl dnsutils tcpdump gstreamer1.0-tools
 
 
 
@@ -168,7 +168,7 @@ RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz 
 
 
 #  2022/01   commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
-RUN apt-get remove -y libnice-dev libnice10 && 
+RUN apt-get remove -y libnice-dev libnice10 && \
     git clone https://gitlab.freedesktop.org/libnice/libnice.git && \
     cd libnice && \
     git checkout 3d9cae16a5094aadb1651572644cb5786a8b4e2d && \
