@@ -170,7 +170,7 @@ RUN git clone https://boringssl.googlesource.com/boringssl && \
 
 
 
-RUN LIBWEBSOCKET="3.1.0" && wget https://github.com/warmcat/libwebsockets/archive/v$LIBWEBSOCKET.tar.gz && \
+RUN LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archive/v$LIBWEBSOCKET.tar.gz && \
     tar xzvf v$LIBWEBSOCKET.tar.gz && \
     cd libwebsockets-$LIBWEBSOCKET && \
     mkdir build && \
