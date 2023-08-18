@@ -140,7 +140,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
         make \
         pkg-config \
     && rm -rf /var/lib/apt/lists/*
-ENV GOLANG_VERSION 1.7.5
+ENV GOLANG_VERSION 1.20.1
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 ENV GOLANG_DOWNLOAD_SHA256 2e4dd6c44f0693bef4e7b46cc701513d74c3cc44f2419bf519d7868b12931ac3
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
