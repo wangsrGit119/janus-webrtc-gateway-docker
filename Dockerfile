@@ -200,7 +200,6 @@ RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus
     sh autogen.sh &&  \
     PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
     --enable-post-processing \
-    --enable-openssl \
     --enable-data-channels \
     --disable-rabbitmq \
     --disable-mqtt \
