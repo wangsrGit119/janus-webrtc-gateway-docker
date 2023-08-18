@@ -168,7 +168,7 @@ RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz 
 
 
 #  2022/01   commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
-RUN apt-get remove -y libnice-dev libnice10 && \
+RUN apt-get remove -y libnice-dev libnice10 && apt-get update -y && apt-get install -y python3-pip ninja-build  && pip3 install meson && \
     git clone https://gitlab.freedesktop.org/libnice/libnice.git && \
     cd libnice && \
     git checkout 3d9cae16a5094aadb1651572644cb5786a8b4e2d && \
