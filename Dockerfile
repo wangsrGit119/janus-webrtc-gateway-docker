@@ -10,6 +10,7 @@ RUN apt-get -y update && apt-get install -y \
     libglib2.0-dev \
     libopus-dev \
     libogg-dev \
+     libcurl4-openssl-dev \
     libini-config-dev \
     libcollection-dev \
     libconfig-dev \
