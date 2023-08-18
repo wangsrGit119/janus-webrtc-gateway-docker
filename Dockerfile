@@ -130,8 +130,6 @@ RUN FFMPEG_VER="n4.2.1" && cd ~/ffmpeg_sources && \
 
 
 
-# Boringssl build section
-# If you want to use the openssl instead of boringssl
 # RUN apt-get update -y && apt-get install -y libssl-dev
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
         g++ \
@@ -150,25 +148,6 @@ ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
-#boringssl
-RUN git clone https://boringssl.googlesource.com/boringssl && \
-    cd boringssl && \
-    # Don't barf on errors
-    sed -i s/" -Werror"//g CMakeLists.txt && \
-    # Build
-    mkdir -p build && \
-    cd build && \
-    cmake -DCMAKE_CXX_FLAGS="-lrt" .. && \
-    make && \
-    cd .. && \
-    # Install
-    sudo mkdir -p /opt/boringssl && \
-    sudo cp -R include /opt/boringssl/ && \
-    sudo mkdir -p /opt/boringssl/lib && \
-    sudo cp build/ssl/libssl.a /opt/boringssl/lib/ && \
-    sudo cp build/crypto/libcrypto.a /opt/boringssl/lib/
-
-
 
 RUN LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archive/v$LIBWEBSOCKET.tar.gz && \
     tar xzvf v$LIBWEBSOCKET.tar.gz && \
@@ -179,7 +158,7 @@ RUN LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archiv
     make && make install
 
 
-RUN SRTP="2.2.0" && apt-get remove -y libsrtp0-dev && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz && \
+RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz && \
     tar xfv v$SRTP.tar.gz && \
     cd libsrtp-$SRTP && \
     ./configure --prefix=/usr --enable-openssl && \
@@ -199,8 +178,6 @@ RUN apt-get remove -y libnice-dev libnice10 && \
     ./configure --prefix=/usr && \
     make && \
     make install
-
-
 
 
 # datachannel build
@@ -225,7 +202,7 @@ RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus
     sh autogen.sh &&  \
     PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
     --enable-post-processing \
-    --enable-boringssl \
+    --enable-openssl \
     --enable-data-channels \
     --disable-rabbitmq \
     --disable-mqtt \
