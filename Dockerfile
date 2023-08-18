@@ -167,7 +167,7 @@ RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz 
 
 
 
-# March, 2022 01  commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
+#  2022/01   commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
 RUN apt-get remove -y libnice-dev libnice10 && 
     git clone https://gitlab.freedesktop.org/libnice/libnice.git && \
     cd libnice && \
@@ -185,16 +185,15 @@ cd usrsctp && \
 ./configure --prefix=/usr --disable-programs --disable-inet --disable-inet6 && \
 make && sudo make install
 
+# libmicrohttpd
 WORKDIR /tmp
 RUN git clone https://git.gnunet.org/libmicrohttpd.git
 WORKDIR /tmp/libmicrohttpd
-RUN git checkout v0.9.77
-RUN autoreconf -fi
-RUN ./configure
-RUN make && make install
+RUN git checkout v0.9.77 && RUN autoreconf -fi && ./configure && \
+make && make install
 
 
-
+# janus
 RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
     git checkout refs/tags/v1.1.4 && \
     sh autogen.sh &&  \
@@ -207,14 +206,8 @@ COPY nginx.conf /usr/local/nginx/nginx.conf
 ENV NODE_VERSION 16.20.1
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir $NVM_DIR
-
-RUN cd / && wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash && source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION
-
+RUN cd / && wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash 
 
 SHELL ["/bin/bash", "-l", "-euxo", "pipefail", "-c"]
-RUN node -v
-RUN npm -v
-
-
 
 CMD nginx && janus
