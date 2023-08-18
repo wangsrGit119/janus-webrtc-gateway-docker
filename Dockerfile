@@ -1,13 +1,11 @@
-FROM buildpack-deps:stretch
+FROM FROM ubuntu:22.04
 
-RUN sed -i 's/archive.ubuntu.com/mirror.aarnet.edu.au\/pub\/ubuntu\/archive/g' /etc/apt/sources.list
-
+ENV DEBIAN_FRONTEND noninteractive
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get -y update && apt-get install -y \
     libjansson-dev \
     libnice-dev \
     libssl-dev \
-    libsrtp-dev \
     libsofia-sip-ua-dev \
     libglib2.0-dev \
     libopus-dev \
@@ -26,7 +24,7 @@ RUN apt-get -y update && apt-get install -y \
     cmake \
     unzip \
     zip \
-    lsof wget vim sudo rsync cron mysql-client openssh-server supervisor locate mplayer valgrind certbot python-certbot-apache dnsutils tcpdump gstreamer1.0-tools
+    lsof wget vim sudo rsync cron mysql-client openssh-server supervisor locate mplayer valgrind certbot dnsutils tcpdump gstreamer1.0-tools
 
 
 
