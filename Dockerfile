@@ -24,7 +24,7 @@ RUN apt-get -y update && apt-get install -y \
     cmake \
     unzip \
     zip \
-    lsof wget vim sudo rsync cron mysql-client openssh-server supervisor locate mplayer valgrind certbot dnsutils tcpdump gstreamer1.0-tools
+    lsof wget vim sudo rsync cron mysql-client openssh-server supervisor locate mplayer valgrind certbot curl dnsutils tcpdump gstreamer1.0-tools
 
 
 
