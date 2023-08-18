@@ -166,18 +166,15 @@ RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz 
 
 
 
-# March, 2019 1 commit 67807a17ce983a860804d7732aaf7d2fb56150ba
-RUN apt-get remove -y libnice-dev libnice10 && \
-    echo "deb http://deb.debian.org/debian  stretch-backports main" >> /etc/apt/sources.list && \
-    apt-get  update && \
-    apt-get install -y gtk-doc-tools libgnutls28-dev -t stretch-backports  && \
+# March, 2022 01  commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
+RUN apt-get remove -y libnice-dev libnice10 && 
     git clone https://gitlab.freedesktop.org/libnice/libnice.git && \
     cd libnice && \
-    git checkout 67807a17ce983a860804d7732aaf7d2fb56150ba && \
-    bash autogen.sh && \
-    ./configure --prefix=/usr && \
-    make && \
-    make install
+    git checkout 3d9cae16a5094aadb1651572644cb5786a8b4e2d && \
+    meson --prefix=/usr build && \
+    ninja -C build && \
+    sudo ninja -C build install
+
 
 
 # datachannel build
