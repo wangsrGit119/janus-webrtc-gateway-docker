@@ -197,7 +197,6 @@ make && make install
 RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
     git checkout refs/tags/v1.1.4 && \
     sh autogen.sh &&  \
-    ./configure --prefix=/opt/janus && \
     make && make install && make configs
 
 COPY nginx.conf /usr/local/nginx/nginx.conf
