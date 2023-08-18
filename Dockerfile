@@ -204,19 +204,11 @@ RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus
 COPY nginx.conf /usr/local/nginx/nginx.conf
 
 
-ENV NVM_VERSION v0.35.3
-ENV NODE_VERSION v16.20.1
+ENV NODE_VERSION 16.20.1
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir $NVM_DIR
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash
 
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-
-RUN echo "source $NVM_DIR/nvm.sh && \
-    nvm install $NODE_VERSION && \
-    nvm alias default $NODE_VERSION && \
-    nvm use default" | bash
+RUN cd / && wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash && source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION
 
 
 SHELL ["/bin/bash", "-l", "-euxo", "pipefail", "-c"]
