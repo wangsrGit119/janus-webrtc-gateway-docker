@@ -189,7 +189,7 @@ make && sudo make install
 WORKDIR /tmp
 RUN git clone https://git.gnunet.org/libmicrohttpd.git
 WORKDIR /tmp/libmicrohttpd
-RUN git checkout v0.9.77 && RUN autoreconf -fi && ./configure && \
+RUN git checkout v0.9.77 && autoreconf -fi && ./configure && \
 make && make install
 
 
