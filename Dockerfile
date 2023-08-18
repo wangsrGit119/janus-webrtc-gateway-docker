@@ -150,23 +150,24 @@ ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
-
-
-# https://boringssl.googlesource.com/boringssl/+/chromium-stable
+#boringssl
 RUN git clone https://boringssl.googlesource.com/boringssl && \
     cd boringssl && \
-    git reset --hard c7db3232c397aa3feb1d474d63a1c4dd674b6349 && \
+    # Don't barf on errors
     sed -i s/" -Werror"//g CMakeLists.txt && \
-    mkdir -p build  && \
-    cd build  && \
-    cmake -DCMAKE_CXX_FLAGS="-lrt" ..  && \
-    make  && \
-    cd ..  && \
-    sudo mkdir -p /opt/boringssl  && \
-    sudo cp -R include /opt/boringssl/  && \
-    sudo mkdir -p /opt/boringssl/lib  && \
-    sudo cp build/ssl/libssl.a /opt/boringssl/lib/  && \
+    # Build
+    mkdir -p build && \
+    cd build && \
+    cmake -DCMAKE_CXX_FLAGS="-lrt" .. && \
+    make && \
+    cd .. && \
+    # Install
+    sudo mkdir -p /opt/boringssl && \
+    sudo cp -R include /opt/boringssl/ && \
+    sudo mkdir -p /opt/boringssl/lib && \
+    sudo cp build/ssl/libssl.a /opt/boringssl/lib/ && \
     sudo cp build/crypto/libcrypto.a /opt/boringssl/lib/
+
 
 
 RUN LIBWEBSOCKET="3.1.0" && wget https://github.com/warmcat/libwebsockets/archive/v$LIBWEBSOCKET.tar.gz && \
