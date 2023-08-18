@@ -178,11 +178,11 @@ RUN apt-get remove -y libnice-dev libnice10 &&
 
 
 # datachannel build
-RUN cd / && git clone https://github.com/sctplab/usrsctp.git && cd /usrsctp && \
-    git checkout origin/master && git reset --hard 1c9c82fbe3582ed7c474ba4326e5929d12584005 && \
-    ./bootstrap && \
-    ./configure && \
-    make && make install
+RUN cd / && git clone https://github.com/sctplab/usrsctp && \
+cd usrsctp && \
+./bootstrap && \
+./configure --prefix=/usr --disable-programs --disable-inet --disable-inet6 && \
+make && sudo make install
 
 WORKDIR /tmp
 RUN git clone https://git.gnunet.org/libmicrohttpd.git
