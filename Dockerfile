@@ -186,11 +186,12 @@ cd usrsctp && \
 make && sudo make install
 
 # libmicrohttpd
-WORKDIR /tmp
-RUN git clone https://git.gnunet.org/libmicrohttpd.git
-WORKDIR /tmp/libmicrohttpd
-RUN git checkout v0.9.60 && autoreconf -fi && ./configure && \
-make && make install
+RUN apt-get update -y && apt-get install -y libmicrohttpd12
+# WORKDIR /tmp
+# RUN git clone https://git.gnunet.org/libmicrohttpd.git
+# WORKDIR /tmp/libmicrohttpd
+# RUN git checkout v0.9.60 && autoreconf -fi && ./configure && \
+# make && make install
 
 
 # janus
