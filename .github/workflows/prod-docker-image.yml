@@ -24,6 +24,6 @@ jobs:
     - name: Set Global Variables
       run: echo "version=$(date +%Y%m%d)" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag sucwangsr/janus-webrtc-gateway-docker:$version
+      run: docker build . --file Dockerfile --tag sucwangsr/janus-webrtc-gateway-docker:20230320
     - name: push hub
-      run: docker login -u ${{secrets.HUB_USER}} -p ${{secrets.HUB_PWD}} && docker push sucwangsr/janus-webrtc-gateway-docker:$version && docker logout
+      run: docker login -u ${{secrets.HUB_USER}} -p ${{secrets.HUB_PWD}} && docker push sucwangsr/janus-webrtc-gateway-docker:20230320 && docker logout
