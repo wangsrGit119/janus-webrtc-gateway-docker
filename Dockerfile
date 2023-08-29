@@ -30,103 +30,6 @@ RUN apt-get -y update && apt-get install -y \
 
 
 
-# # FFmpeg build section
-# RUN mkdir ~/ffmpeg_sources
-
-# RUN apt-get update && \
-#     apt-get -y install autoconf automake build-essential libass-dev libfreetype6-dev \
-#     libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev \
-#     libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev
-
-# RUN YASM="1.3.0" && cd ~/ffmpeg_sources && \
-#     wget http://www.tortall.net/projects/yasm/releases/yasm-$YASM.tar.gz && \
-#     tar xzvf yasm-$YASM.tar.gz && \
-#     cd yasm-$YASM && \
-#     ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin"  && \
-#     make && \
-#     make install && \
-#     make distclean
-
-# RUN VPX="v1.8.1" && cd ~/ffmpeg_sources && \
-#     wget https://chromium.googlesource.com/webm/libvpx/+archive/$VPX.tar.gz && \
-#     tar xzvf $VPX.tar.gz && \
-#     pwd \
-#     cd $VPX && \
-#     PATH="$HOME/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --disable-examples --disable-unit-tests && \
-#     PATH="$HOME/bin:$PATH" make && \
-#     make install && \
-#     make clean
-
-
-# RUN OPUS="1.3" && cd ~/ffmpeg_sources && \
-#     wget https://archive.mozilla.org/pub/opus/opus-$OPUS.tar.gz && \
-#     tar xzvf opus-$OPUS.tar.gz && \
-#     cd opus-$OPUS && \
-#     ./configure --help && \
-#     ./configure --prefix="$HOME/ffmpeg_build"  && \
-#     make && \
-#     make install && \
-#     make clean
-
-
-# RUN LAME="3.100" && apt-get install -y nasm  && cd ~/ffmpeg_sources && \
-#     wget http://downloads.sourceforge.net/project/lame/lame/$LAME/lame-$LAME.tar.gz && \
-#     tar xzvf lame-$LAME.tar.gz && \
-#     cd lame-$LAME && \
-#     ./configure --prefix="$HOME/ffmpeg_build" --enable-nasm --disable-shared && \
-#     make && \
-#     make install
-
-# RUN X264="20181001-2245-stable" && cd ~/ffmpeg_sources && \
-#     wget http://download.videolan.org/pub/x264/snapshots/x264-snapshot-$X264.tar.bz2 && \
-#     tar xjvf x264-snapshot-$X264.tar.bz2 && \
-#     cd x264-snapshot-$X264 && \
-#     PATH="$HOME/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static --disable-opencl --disable-asm && \
-#     PATH="$HOME/bin:$PATH" make && \
-#     make install && \
-#     make distclean
-
-# RUN FDK_AAC="2.0.1" && cd ~/ffmpeg_sources && \
-#     wget -O fdk-aac.tar.gz https://github.com/mstorsjo/fdk-aac/archive/v$FDK_AAC.tar.gz && \
-#     tar xzvf fdk-aac.tar.gz && \
-#     cd fdk-aac-$FDK_AAC && \
-#     autoreconf -fiv && \
-#     ./configure --prefix="$HOME/ffmpeg_build" --disable-shared && \
-#     make && \
-#     make install && \
-#     make distclean
-
-# RUN FFMPEG_VER="n4.2.1" && cd ~/ffmpeg_sources && \
-#     wget https://github.com/FFmpeg/FFmpeg/archive/$FFMPEG_VER.zip && \
-#     unzip $FFMPEG_VER.zip
-
-# RUN FFMPEG_VER="n4.2.1" && cd ~/ffmpeg_sources && \
-#     cd FFmpeg-$FFMPEG_VER && \
-#     PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
-#     --prefix="$HOME/ffmpeg_build" \
-#     --pkg-config-flags="--static" \
-#     --extra-cflags="-I$HOME/ffmpeg_build/include" \
-#     --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
-#     --bindir="$HOME/bin" \
-#     --enable-gpl \
-#     --enable-libass \
-#     --enable-libfdk-aac \
-#     --enable-libfreetype \
-#     --enable-libmp3lame \
-#     --enable-libopus \
-#     --enable-libtheora \
-#     --enable-libvorbis \
-#     --enable-libvpx \
-#     --enable-libx264 \
-#     --enable-nonfree \
-#     --enable-libxcb \
-#     --enable-libpulse \
-#     --enable-alsa && \
-#     PATH="$HOME/bin:$PATH" make && \
-#     make install && \
-#     make distclean && \
-#     hash -r && \
-#     mv ~/bin/ffmpeg /usr/local/bin/
 
 
 
@@ -186,28 +89,45 @@ cd usrsctp && \
 make && sudo make install
 
 # libmicrohttpd
-RUN apt-get update -y && apt-get install -y libmicrohttpd12
-# WORKDIR /tmp
-# RUN git clone https://git.gnunet.org/libmicrohttpd.git
-# WORKDIR /tmp/libmicrohttpd
-# RUN git checkout v0.9.60 && autoreconf -fi && ./configure && \
-# make && make install
+#RUN apt-get update -y && apt-get install -y libmicrohttpd12
+
+RUN apt-get update && apt-get install -y autoconf texinfo automake && \
+	cd /tmp && git clone https://git.gnunet.org/libmicrohttpd.git && \
+	cd libmicrohttpd && git checkout v0.9.72 && autoreconf -fi && \
+	./configure --prefix=/usr --enable-messages --enable-https && make && make install
 
 
+## janus if  --enable-post-processing
+RUN apt-get update -y && apt-get install libavutil56 libavcodec58 libavformat58 libavutil-dev libavcodec-dev libavformat-dev -y
 # janus
 RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
     git checkout refs/tags/v1.1.4 && \
     sh autogen.sh &&  \
-    ./configure && \
+    ./configure --prefix=/usr/local \
+	--enable-post-processing \
+    --enable-data-channels \
+    --disable-rabbitmq \
+    --disable-mqtt \
+    --disable-unix-sockets \
+    --enable-plugin-recordplay \
+    --enable-rest \
+    --enable-all-handlers && \
     make && make install && make configs
 
-COPY nginx.conf /usr/local/nginx/nginx.conf
 
 
 ENV NODE_VERSION 16.20.1
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir $NVM_DIR
 RUN cd / && wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash 
+
+#FFmpeg install
+RUN apt update -y && sudo apt install  -y ffmpeg && ffmpeg -version
+
+# nginx
+RUN apt-get update -y && apt-get install -y nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
 
 SHELL ["/bin/bash", "-l", "-euxo", "pipefail", "-c"]
 
