@@ -4,11 +4,12 @@
 
 > **Warning**
 >- if you want to use Janus 0.x please visit this repo [janus-webrtc-gateway-docker-0.x](https://github.com/atyenoria/janus-webrtc-gateway-docker)
-## janus 1.x
 
-[janus address](https://github.com/meetecho/janus-gateway.git "janus:1.0")
+## janus officia repository
 
-> release repo  to docker hub by github action
+[The official janus repository](https://github.com/meetecho/janus-gateway.git "janus:1.0")
+
+>New version release depends on GitHub Action
 
 ## Base
 
