@@ -1,0 +1,29 @@
+name: Docker Image CI Prod arm64 depend on buildjet
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'info'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+
+jobs:
+
+  build:
+
+    runs-on: buildjet-4vcpu-ubuntu-2204-arm
+
+    steps:
+    - uses: buildjet/cache@v3
+    - name: Set Global Variables
+      run: echo "version=1.2.0-arm64" >> $GITHUB_ENV
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag sucwangsr/janus-webrtc-gateway-docker:$version
+    - name: push hub
+      run: docker login -u ${{secrets.HUB_USER}} -p ${{secrets.HUB_PWD}} && docker push sucwangsr/janus-webrtc-gateway-docker:$version && docker logout
