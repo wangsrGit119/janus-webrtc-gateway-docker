@@ -17,7 +17,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 > https://github.com/atyenoria/janus-webrtc-gateway-docker
 > 
 
-## image version
+## amd image version
 
 |  janus-webrtc-docker:version |  janus:version |
 | ------------ | ------------ |
@@ -32,6 +32,14 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 |  20230320 | 1.1.3   |
 |  20230829 | 1.1.4   |
 |  1.2.0 | 1.2.0   |
+
+## arm64 images version
+
+|  janus-webrtc-docker:version |  janus:version |
+| ------------ | ------------ |
+|  1.2.0-arm64 | 1.2.0   |
+
+
 ## How to use
 
  - mkdir conf ---- configs from [https://github.com/meetecho/janus-gateway/tree/master/conf](https://github.com/meetecho/janus-gateway/tree/master/conf)
