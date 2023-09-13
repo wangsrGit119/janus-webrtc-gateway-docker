@@ -25,23 +25,16 @@ RUN apt-get -y update && apt-get install -y \
     cmake \
     unzip \
     zip \
+    g++ \
+    gcc \
+    libc6-dev \
+    make \
+    pkg-config \
     lsof wget vim sudo rsync cron mysql-client openssh-server supervisor locate mplayer valgrind certbot curl dnsutils tcpdump gstreamer1.0-tools
 
 
 
-
-
-
-
-
-# RUN apt-get update -y && apt-get install -y libssl-dev
-RUN apt-get -y update && apt-get install -y --no-install-recommends \
-        g++ \
-        gcc \
-        libc6-dev \
-        make \
-        pkg-config \
-    && rm -rf /var/lib/apt/lists/*
+# golang
 ENV GOLANG_VERSION 1.20.1
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
@@ -53,6 +46,8 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
 
+
+# libwebsockets
 RUN LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archive/v$LIBWEBSOCKET.tar.gz && \
     tar xzvf v$LIBWEBSOCKET.tar.gz && \
     cd libwebsockets-$LIBWEBSOCKET && \
@@ -61,7 +56,7 @@ RUN LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archiv
     cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_C_FLAGS="-fpic" -DLWS_MAX_SMP=1 -DLWS_IPV6="ON" .. && \
     make && make install
 
-
+# libsrtp
 RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz && \
     tar xfv v$SRTP.tar.gz && \
     cd libsrtp-$SRTP && \
@@ -70,7 +65,7 @@ RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz 
 
 
 
-#  2022/01   commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
+# libnice 0.1.21    commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
 RUN apt-get remove -y libnice-dev libnice10 && apt-get update -y && apt-get install -y python3-pip ninja-build  && pip3 install meson && \
     git clone https://gitlab.freedesktop.org/libnice/libnice.git && \
     cd libnice && \
@@ -88,16 +83,14 @@ cd usrsctp && \
 ./configure --prefix=/usr --disable-programs --disable-inet --disable-inet6 && \
 make && sudo make install
 
-# libmicrohttpd
-#RUN apt-get update -y && apt-get install -y libmicrohttpd12
-
+# libmicrohttpd v0.9.72
 RUN apt-get update && apt-get install -y autoconf texinfo automake && \
 	cd /tmp && git clone https://git.gnunet.org/libmicrohttpd.git && \
 	cd libmicrohttpd && git checkout v0.9.72 && autoreconf -fi && \
 	./configure --prefix=/usr --enable-messages --enable-https && make && make install
 
 
-## janus if  --enable-post-processing
+## janus if build use --enable-post-processing
 RUN apt-get update -y && apt-get install libavutil56 libavcodec58 libavformat58 libavutil-dev libavcodec-dev libavformat-dev -y
 # janus
 RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
@@ -114,11 +107,6 @@ RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus
     make && make install && make configs
 
 
-
-ENV NODE_VERSION 16.20.1
-ENV NVM_DIR /usr/local/nvm
-RUN mkdir $NVM_DIR
-RUN cd / && wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash 
 
 #FFmpeg install
 RUN apt update -y && sudo apt install  -y ffmpeg && ffmpeg -version
