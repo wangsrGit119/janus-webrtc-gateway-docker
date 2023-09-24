@@ -10,6 +10,7 @@ RUN apt-get -y update && apt-get install -y \
     libglib2.0-dev \
     zlib1g-dev \
     libopus-dev \
+    libspeexdsp-dev \
     libogg-dev \
     liblua5.3-0 \
      libcurl4-openssl-dev \
