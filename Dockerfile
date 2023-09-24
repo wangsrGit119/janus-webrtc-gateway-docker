@@ -55,7 +55,7 @@ RUN cd /tmp/ && SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$
 
 
 # libnice 0.1.21    commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
-RUN cd /tmp/ && apt-get remove -y libnice-dev libnice10 && apt-get update -y && apt-get install -y python3-pip ninja-build  && pip3 install meson && \
+RUN cd / && apt-get remove -y libnice-dev libnice10 && apt-get update -y && apt-get install -y python3-pip ninja-build  && pip3 install meson && \
     git clone https://gitlab.freedesktop.org/libnice/libnice.git && \
     cd libnice && \
     git checkout 3d9cae16a5094aadb1651572644cb5786a8b4e2d && \
@@ -65,7 +65,7 @@ RUN cd /tmp/ && apt-get remove -y libnice-dev libnice10 && apt-get update -y && 
 
 
 # datachannel build
-RUN cd /tmp/ && git clone https://github.com/sctplab/usrsctp && \
+RUN cd / && git clone https://github.com/sctplab/usrsctp && \
 cd usrsctp && \
 ./bootstrap && \
 ./configure --prefix=/usr --disable-programs --disable-inet --disable-inet6 && \
@@ -79,16 +79,18 @@ RUN apt-get update && apt-get install -y autoconf texinfo automake && \
 
 
 # lua for plugin  Lua
-RUN cd /tmp/ &&  curl -R -O http://www.lua.org/ftp/lua-5.4.6.tar.gz \
+RUN curl -R -O http://www.lua.org/ftp/lua-5.4.6.tar.gz \
     && tar zxf lua-5.4.6.tar.gz \
     && cd lua-5.4.6 \
-    && make all test 
+    && make all test \
+    && make install
     
 # for duktape plugin
 RUN cd /tmp/ && curl -R -O https://duktape.org/duktape-2.7.0.tar.xz \
     && tar xf duktape-2.7.0.tar.xz \
-    && cd duktape-2.7.0 \
-    && make -f Makefile.cmdline
+    && mv duktape-2.7.0 / && cd /duktape-2.7.0  \
+    && make -f Makefile.cmdline \
+    && ln -s /duktape-2.7.0/duktape-2.7.0/duk /usr/local/bin/duk
 
   
 ## janus if build use --enable-post-processing
@@ -96,7 +98,7 @@ RUN apt-get update -y && apt-get install libavutil56 libavcodec58 libavformat58 
 
 
 # janus
-RUN cd /tmp/ && git clone https://github.com/meetecho/janus-gateway.git && cd janus-gateway && \
+RUN cd / &&  git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
     git checkout refs/tags/v1.2.0 && \
     sh autogen.sh &&  \
     ./configure --prefix=/usr/local \
