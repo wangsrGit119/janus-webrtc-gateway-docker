@@ -83,14 +83,17 @@ RUN curl -R -O http://www.lua.org/ftp/lua-5.4.6.tar.gz \
     && tar zxf lua-5.4.6.tar.gz \
     && cd lua-5.4.6 \
     && make all test \
-    && make install
+    && make install \ 
+    && lua -v
     
 # for duktape plugin
 RUN cd /tmp/ && curl -R -O https://duktape.org/duktape-2.7.0.tar.xz \
     && tar xf duktape-2.7.0.tar.xz \
     && mv duktape-2.7.0 / && cd /duktape-2.7.0  \
     && make -f Makefile.cmdline \
-    && ln -s /duktape-2.7.0/duktape-2.7.0/duk /usr/local/bin/duk
+    && ln -s /duktape-2.7.0/duktape-2.7.0/duk /usr/local/bin/duk \
+    && duk
+    
 
   
 ## janus if build use --enable-post-processing
