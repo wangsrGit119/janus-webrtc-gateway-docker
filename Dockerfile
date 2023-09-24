@@ -8,8 +8,10 @@ RUN apt-get -y update && apt-get install -y \
     libssl-dev \
     libsofia-sip-ua-dev \
     libglib2.0-dev \
+    zlib1g-dev \
     libopus-dev \
     libogg-dev \
+    liblua5.3-0 \
      libcurl4-openssl-dev \
     libini-config-dev \
     libcollection-dev \
@@ -77,16 +79,6 @@ RUN apt-get update && apt-get install -y autoconf texinfo automake && \
 
 
 
-
-## build plugin (audio bridge | Lua Interpreter | Duktape Interpreter need)
-RUN apt-get -y update && \
-	apt-get install -y \
-	libopus0 \
-	libogg0 \
-	libcurl4 \
-  	liblua5.3-0 \
-	librabbitmq4 \
-	libnanomsg5
   
 ## janus if build use --enable-post-processing
 RUN apt-get update -y && apt-get install libavutil56 libavcodec58 libavformat58 libavutil-dev libavcodec-dev libavformat-dev -y
@@ -98,11 +90,9 @@ RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus
     sh autogen.sh &&  \
     ./configure --prefix=/usr/local \
 	--enable-post-processing \
-    --enable-data-channels \
     --disable-rabbitmq \
     --disable-mqtt \
     --disable-unix-sockets \
-    --enable-rest \
     --enable-all-handlers && \
     make && make install && make configs
 
