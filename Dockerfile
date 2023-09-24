@@ -12,7 +12,6 @@ RUN apt-get -y update && apt-get install -y \
     libopus-dev \
     libspeexdsp-dev \
     libogg-dev \
-    liblua5.3-0 \
      libcurl4-openssl-dev \
     libini-config-dev \
     libcollection-dev \
@@ -38,7 +37,7 @@ RUN apt-get -y update && apt-get install -y \
 
 
 # libwebsockets
-RUN LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archive/v$LIBWEBSOCKET.tar.gz && \
+RUN cd /tmp/ &&  LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archive/v$LIBWEBSOCKET.tar.gz && \
     tar xzvf v$LIBWEBSOCKET.tar.gz && \
     cd libwebsockets-$LIBWEBSOCKET && \
     mkdir build && \
@@ -47,7 +46,7 @@ RUN LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archiv
     make && make install
 
 # libsrtp
-RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz && \
+RUN cd /tmp/ && SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz && \
     tar xfv v$SRTP.tar.gz && \
     cd libsrtp-$SRTP && \
     ./configure --prefix=/usr --enable-openssl && \
@@ -56,7 +55,7 @@ RUN SRTP="2.2.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz 
 
 
 # libnice 0.1.21    commit 3d9cae16a5094aadb1651572644cb5786a8b4e2d
-RUN apt-get remove -y libnice-dev libnice10 && apt-get update -y && apt-get install -y python3-pip ninja-build  && pip3 install meson && \
+RUN cd /tmp/ && apt-get remove -y libnice-dev libnice10 && apt-get update -y && apt-get install -y python3-pip ninja-build  && pip3 install meson && \
     git clone https://gitlab.freedesktop.org/libnice/libnice.git && \
     cd libnice && \
     git checkout 3d9cae16a5094aadb1651572644cb5786a8b4e2d && \
@@ -66,7 +65,7 @@ RUN apt-get remove -y libnice-dev libnice10 && apt-get update -y && apt-get inst
 
 
 # datachannel build
-RUN cd / && git clone https://github.com/sctplab/usrsctp && \
+RUN cd /tmp/ && && git clone https://github.com/sctplab/usrsctp && \
 cd usrsctp && \
 ./bootstrap && \
 ./configure --prefix=/usr --disable-programs --disable-inet --disable-inet6 && \
@@ -79,6 +78,17 @@ RUN apt-get update && apt-get install -y autoconf texinfo automake && \
 	./configure --prefix=/usr --enable-messages --enable-https && make && make install
 
 
+# lua for plugin  Lua
+RUN cd /tmp/ &&  curl -R -O http://www.lua.org/ftp/lua-5.4.6.tar.gz \
+    && tar zxf lua-5.4.6.tar.gz \
+    && cd lua-5.4.6 \
+    && make all test 
+    
+# for duktape plugin
+RUN cd /tmp/ && curl -R -O https://duktape.org/duktape-2.7.0.tar.xz \
+    && tar xf duktape-2.7.0.tar.xz \
+    && cd duktape-2.7.0 \
+    && make -f Makefile.cmdline
 
   
 ## janus if build use --enable-post-processing
@@ -86,7 +96,7 @@ RUN apt-get update -y && apt-get install libavutil56 libavcodec58 libavformat58 
 
 
 # janus
-RUN cd / && git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
+RUN cd /tmp/ && git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
     git checkout refs/tags/v1.2.0 && \
     sh autogen.sh &&  \
     ./configure --prefix=/usr/local \
