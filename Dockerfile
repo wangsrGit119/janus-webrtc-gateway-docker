@@ -65,7 +65,7 @@ RUN cd /tmp/ && apt-get remove -y libnice-dev libnice10 && apt-get update -y && 
 
 
 # datachannel build
-RUN cd /tmp/ && && git clone https://github.com/sctplab/usrsctp && \
+RUN cd /tmp/ && git clone https://github.com/sctplab/usrsctp && \
 cd usrsctp && \
 ./bootstrap && \
 ./configure --prefix=/usr --disable-programs --disable-inet --disable-inet6 && \
