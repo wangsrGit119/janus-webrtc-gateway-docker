@@ -19,7 +19,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 
 ## amd image version
 
-|  Janus-webrtc-docker Version |  Janus Version |Desc|
+|  janus-webrtc-gateway-docker Version |  Janus Version |Desc|
 | ------------ | ------------ |------------ |
 |  20220407 |  1.0.0 |------------ |
 |  20220617 | 1.0.1   |------------ |
