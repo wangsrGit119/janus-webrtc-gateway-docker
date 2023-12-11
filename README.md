@@ -33,12 +33,14 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 |  20230829 | 1.1.4   |------------ |
 |  1.2.0 | 1.2.0   | no Audio Bridge 、Lua、Duktape|
 |  1.2.0-slim | 1.2.0   | with Audio Bridge plugin  |
+|  1.2.1-slim | 1.2.1   | with Audio Bridge plugin  |
 
 ## arm64 images version
 
 |  janus-webrtc-docker:version |  janus:version |
 | ------------ | ------------ |
 |  1.2.0-arm64 | 1.2.0   |
+|  1.2.1-arm64 | 1.2.1  |
 
 
 ## How to use
