@@ -79,7 +79,7 @@ RUN apt-get update && apt-get install -y autoconf texinfo automake && \
 
 
 # lua for plugin  Lua
-RUN curl -R -O http://www.lua.org/ftp/lua-5.4.6.tar.gz \
+RUN curl -L -R -O https://www.lua.org/ftp/lua-5.4.6.tar.gz \
     && tar zxf lua-5.4.6.tar.gz \
     && cd lua-5.4.6 \
     && make all test \
