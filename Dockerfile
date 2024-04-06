@@ -102,7 +102,7 @@ RUN apt-get update -y && apt-get install libavutil56 libavcodec58 libavformat58 
 
 # janus
 RUN cd / &&  git clone https://github.com/meetecho/janus-gateway.git && cd /janus-gateway && \
-    git checkout refs/tags/v1.2.1 && \
+    git checkout refs/tags/v1.2.2 && \
     sh autogen.sh &&  \
     ./configure --prefix=/usr/local \
 	--enable-post-processing \
