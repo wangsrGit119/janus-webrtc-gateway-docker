@@ -35,6 +35,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 |  1.2.0-slim | 1.2.0   | with Audio Bridge plugin  |
 |  1.2.1-slim | 1.2.1   | with Audio Bridge plugin  |
 |  1.2.2-slim | 1.2.2   | with Audio Bridge plugin  |
+|  1.2.3-slim | 1.2.3   | with Audio Bridge plugin  |
 ## arm64 images version
 
 |  janus-webrtc-docker:version |  janus:version |
@@ -42,6 +43,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 |  1.2.0-arm64 | 1.2.0   |
 |  1.2.1-arm64 | 1.2.1  |
 |  1.2.2-arm64 | 1.2.2  |
+|  1.2.3-arm64 | 1.2.3  |
 
 
 ## How to use
@@ -50,14 +52,14 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
  - touch docker-compose.yml --- content eg::point_down: 
 
 ```yaml
-version: '1.2.0'
+version: '1.2.3'
 services:
 
   #
   # janus-gateway
   #
   janus-gateway:
-    image: 'sucwangsr/janus-webrtc-gateway-docker:1.2.0-slim'
+    image: 'sucwangsr/janus-webrtc-gateway-docker:1.2.3-slim'
     #command: ["/usr/local/bin/janus", "-F", "/usr/local/etc/janus"] # only start janus 
     command: sh -c "nginx && /usr/local/bin/janus -F /usr/local/etc/janus  # if want to start nginx (port 8086)
     network_mode: "host"
