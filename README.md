@@ -61,7 +61,7 @@ services:
   janus-gateway:
     image: 'sucwangsr/janus-webrtc-gateway-docker:1.2.3-slim'
     #command: ["/usr/local/bin/janus", "-F", "/usr/local/etc/janus"] # only start janus 
-    command: sh -c "nginx && /usr/local/bin/janus -F /usr/local/etc/janus  # if want to start nginx (port 8086)
+    command: ["sh", "-c", "nginx && /usr/local/bin/janus -F /usr/local/etc/janus"]  # if want to start nginx (port 8086)
     network_mode: "host"
     
     volumes:
