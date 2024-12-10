@@ -1,6 +1,6 @@
 
 # janus-webrtc-gateway-docker
-[![build docker images - janus-webrtc-docker](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/build-janus-gateway-docker-main.yml/badge.svg)](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/build-janus-gateway-docker-main.yml)
+[![build docker images - janus-webrtc-docker](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/prod-docker-image.yml/badge.svg)](https://github.com/wangsrGit119/janus-webrtc-gateway-docker/actions/workflows/prod-docker-image.yml)
 
 > **Warning**
 >- if you want to use Janus 0.x please visit this repo [janus-webrtc-gateway-docker-0.x](https://github.com/atyenoria/janus-webrtc-gateway-docker)
