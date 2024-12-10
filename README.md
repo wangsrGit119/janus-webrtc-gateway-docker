@@ -36,7 +36,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 |  1.2.2-arm64 | 1.2.2  |
 |  1.2.3-arm64 | 1.2.3  |
 |  1.2.4-arm64 | 1.2.4  |
-|  1.3.0-slim | 1.3.0  | 
+|  1.3.0-arm64 | 1.3.0  | 
 
 ## How to use
 
