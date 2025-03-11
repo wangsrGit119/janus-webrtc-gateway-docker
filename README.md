@@ -27,6 +27,7 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 |  1.2.3-slim | 1.2.3   |   |
 |  1.2.4-slim | 1.2.4   |  |
 |  1.3.0-slim | 1.3.0  |  |
+|  1.3.1-slim | 1.3.1  |  |
 ## arm64 images version
 
 |  janus-webrtc-docker:version |  janus:version |
