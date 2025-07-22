@@ -65,7 +65,9 @@ RUN apt-get update && apt-get install -y \
     mplayer \
     gstreamer1.0-tools \
     # 调试工具
-    valgrind \
+    gdb \
+    strace \
+    ltrace \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
