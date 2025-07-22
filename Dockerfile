@@ -1,41 +1,75 @@
 FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND noninteractive
-RUN rm -rf /var/lib/apt/lists/*
-RUN apt-get -y update && apt-get install -y \
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Shanghai
+
+# 更新包管理器并安装基础包
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    apt-transport-https \
+    software-properties-common \
+    && rm -rf /var/lib/apt/lists/*
+
+# 安装开发依赖包
+RUN apt-get update && apt-get install -y \
+    # 开发工具
+    build-essential \
+    cmake \
+    make \
+    gcc \
+    g++ \
+    libc6-dev \
+    autotools-dev \
+    automake \
+    autopoint \
+    libtool \
+    pkg-config \
+    gengetopt \
+    git \
+    subversion \
+    unzip \
+    zip \
+    # 核心库依赖
     libjansson-dev \
     libnice-dev \
     libssl-dev \
     libsofia-sip-ua-dev \
     libglib2.0-dev \
     zlib1g-dev \
+    # 音频处理库
     libopus-dev \
     libspeexdsp-dev \
     libogg-dev \
-     libcurl4-openssl-dev \
+    # 网络和配置库
+    libcurl4-openssl-dev \
     libini-config-dev \
     libcollection-dev \
     libconfig-dev \
-    pkg-config \
-    gengetopt \
-    libtool \
-    autopoint \
-    automake \
-    build-essential \
-    subversion \
-    git \
-    cmake \
-    unzip \
-    zip \
-    g++ \
-    gcc \
-    libc6-dev \
-    make \
-    pkg-config \
-    lsof wget vim sudo rsync cron mysql-client openssh-server supervisor locate mplayer valgrind certbot curl dnsutils tcpdump gstreamer1.0-tools
+    # 系统工具
+    wget \
+    curl \
+    vim \
+    sudo \
+    rsync \
+    cron \
+    lsof \
+    locate \
+    dnsutils \
+    tcpdump \
+    # 服务相关
+    mysql-client \
+    openssh-server \
+    supervisor \
+    certbot \
+    # 多媒体工具
+    mplayer \
+    gstreamer1.0-tools \
+    # 调试工具
+    valgrind \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
     
-
-
 # libwebsockets
 RUN cd /tmp/ &&  LIBWEBSOCKET="4.3.2" && wget https://github.com/warmcat/libwebsockets/archive/v$LIBWEBSOCKET.tar.gz && \
     tar xzvf v$LIBWEBSOCKET.tar.gz && \
