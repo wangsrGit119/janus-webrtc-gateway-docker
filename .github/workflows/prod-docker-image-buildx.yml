@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.HUB_PWD }}
       - 
         name: Generate App Version
-        run: echo APP_VERSION=`git describe --tags --always`-muti >> $GITHUB_ENV
+        run: echo APP_VERSION=`git describe --tags --abbrev=0`-muti >> $GITHUB_ENV
       -
         name: Build and push
         uses: docker/build-push-action@v6.18.0
