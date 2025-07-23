@@ -35,4 +35,5 @@ jobs:
       - 
         name: Generate App Version
         run: echo APP_VERSION=`git describe --tags --abbrev=0`-muti >> $GITHUB_ENV
-      
+      - name: Print APP_VERSION
+        run: echo "APP_VERSION=$APP_VERSION"
