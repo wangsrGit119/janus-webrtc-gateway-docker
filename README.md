@@ -44,7 +44,8 @@ modify :point_down: repo, and  update janus version , delete nginx-rtmp-module
 ## How to use
 
  - mkdir conf ---- configs from [https://github.com/meetecho/janus-gateway/tree/master/conf](https://github.com/meetecho/janus-gateway/tree/master/conf)
- - touch docker-compose.yml --- content eg::point_down: 
+ - touch docker-compose.yml --- content eg: :point_down:
+
 
 ```yaml
 services:
@@ -53,7 +54,7 @@ services:
   # janus-gateway
   #
   janus-gateway:
-    image: 'sucwangsr/janus-webrtc-gateway-docker:1.3.2-slim'
+    image: 'sucwangsr/janus-webrtc-gateway-docker:latest'
     #command: ["/usr/local/bin/janus", "-F", "/usr/local/etc/janus"] # only start janus 
     command: ["sh", "-c", "nginx && /usr/local/bin/janus -F /usr/local/etc/janus"]  # if want to start nginx (port 8086)
     network_mode: "host"
